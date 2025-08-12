@@ -289,70 +289,73 @@
     </div>
 
     <script>
-        // DOM元素
-        const tokenDisplay = document.getElementById('tokenDisplay');
-        const refreshBtn = document.getElementById('refreshBtn');
-        const loading = document.getElementById('loading');
-        const timestamp = document.getElementById('timestamp');
-        const orderIdInput = document.getElementById('orderId');
-        const errorDisplay = document.getElementById('errorDisplay');
-        
-        // 获取令牌函数
-        async function getToken() {
-            try {
-                // 重置显示
-                errorDisplay.style.display = 'none';
-                errorDisplay.textContent = '';
-                
-                // 验证订单ID
-                const orderId = orderIdInput.value.trim();
-                if (!orderId) {
-                    showError("请输入订单ID");
-                    return;
+        // 确保DOM加载完成后再执行脚本
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM元素
+            const tokenDisplay = document.getElementById('tokenDisplay');
+            const refreshBtn = document.getElementById('refreshBtn');
+            const loading = document.getElementById('loading');
+            const timestamp = document.getElementById('timestamp');
+            const orderIdInput = document.getElementById('orderId');
+            const errorDisplay = document.getElementById('errorDisplay');
+            
+            // 获取令牌函数
+            async function getToken() {
+                try {
+                    // 重置显示
+                    errorDisplay.style.display = 'none';
+                    errorDisplay.textContent = '';
+                    
+                    // 验证订单ID
+                    const orderId = orderIdInput.value.trim();
+                    if (!orderId) {
+                        showError("请输入订单ID");
+                        return;
+                    }
+
+                    // 显示加载状态
+                    loading.style.display = 'block';
+                    tokenDisplay.textContent = '';
+                    
+                    // 模拟API请求（实际使用时替换为真实API）
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                    
+                    // 模拟成功响应
+                    if (Math.random() > 0.3) {
+                        tokenDisplay.textContent = "XKJ4H-9L2M8-NP6Q1";
+                        tokenDisplay.style.color = "#4a90e2";
+                    } else {
+                        throw new Error('订单不正确或已到期，请检查订单ID或联系客服续期');
+                    }
+                    
+                    // 更新时间戳
+                    const now = new Date();
+                    timestamp.textContent = `最后查询: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+                    
+                } catch (error) {
+                    showError(error.message);
+                    tokenDisplay.textContent = error.message;
+                    tokenDisplay.style.color = "#e74c3c";
+                } finally {
+                    loading.style.display = 'none';
                 }
+            }
 
-                // 显示加载状态
-                loading.style.display = 'block';
-                tokenDisplay.textContent = '';
-                
-                // 模拟API请求（实际使用时替换为真实API）
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                
-                // 模拟成功响应
-                if (Math.random() > 0.3) {
-                    tokenDisplay.textContent = "XKJ4H-9L2M8-NP6Q1";
-                    tokenDisplay.style.color = "#4a90e2";
-                } else {
-                    throw new Error('订单不正确或已到期，请检查订单ID或联系客服续期');
+            // 显示错误信息
+            function showError(message) {
+                errorDisplay.textContent = message;
+                errorDisplay.style.display = 'block';
+            }
+
+            // 按钮点击事件
+            refreshBtn.addEventListener('click', getToken);
+            
+            // 允许按回车键查询
+            orderIdInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    getToken();
                 }
-                
-                // 更新时间戳
-                const now = new Date();
-                timestamp.textContent = `最后查询: ${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
-                
-            } catch (error) {
-                showError(error.message);
-                tokenDisplay.textContent = error.message;
-                tokenDisplay.style.color = "#e74c3c";
-            } finally {
-                loading.style.display = 'none';
-            }
-        }
-
-        // 显示错误信息
-        function showError(message) {
-            errorDisplay.textContent = message;
-            errorDisplay.style.display = 'block';
-        }
-
-        // 按钮点击事件
-        refreshBtn.addEventListener('click', getToken);
-        
-        // 允许按回车键查询
-        orderIdInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                getToken();
-            }
+            });
         });
     </script>
 </body>
