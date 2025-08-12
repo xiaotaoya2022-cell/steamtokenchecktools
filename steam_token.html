@@ -199,35 +199,6 @@
             padding-top: 15px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .deploy-guide {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 20px;
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 14px;
-        }
-        
-        .deploy-title {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #66c0f4;
-            text-align: center;
-        }
-        
-        .deploy-steps {
-            margin-left: 20px;
-        }
-        
-        .deploy-steps li {
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        
-        .deploy-steps strong {
-            color: #fdbb2d;
-        }
     </style>
 </head>
 <body>
@@ -264,32 +235,10 @@
         <div class="footer">
             © 2025 steamking.dpdns.org | 安全可靠的服务
         </div>
-        
-        <div class="deploy-guide">
-            <div class="deploy-title">Cloudflare部署指南</div>
-            <ol class="deploy-steps">
-                <li>登录Cloudflare仪表板</li>
-                <li>选择<strong>Workers & Pages</strong> → <strong>创建应用程序</strong></li>
-                <li>选择<strong>Pages</strong> → <strong>连接到Git</strong></li>
-                <li>授权访问您的GitHub账户</li>
-                <li>选择存储库并点击<strong>开始设置</strong></li>
-                <li>配置设置：
-                    <ul>
-                        <li>项目名称：steam-token</li>
-                        <li>生产分支：main</li>
-                        <li>构建设置：全部留空</li>
-                    </ul>
-                </li>
-                <li>点击<strong>保存并部署</strong></li>
-                <li>部署完成后，进入<strong>自定义域</strong></li>
-                <li>添加自定义域：<strong>steamking.dpdns.org</strong></li>
-                <li>在DNS提供商处添加CNAME记录指向Cloudflare</li>
-            </ol>
-        </div>
     </div>
 
     <script>
-        // 确保DOM加载完成后再执行脚本
+        // 确保DOM完全加载后再执行
         document.addEventListener('DOMContentLoaded', function() {
             // DOM元素
             const tokenDisplay = document.getElementById('tokenDisplay');
